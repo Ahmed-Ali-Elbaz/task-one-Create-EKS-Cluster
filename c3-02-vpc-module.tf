@@ -33,6 +33,19 @@ module "vpc" {
   vpc_tags = local.common_tags
 
   
+ # Additional Tags to Subnets
+  public_subnet_tags = {
+    Type = "Public-Subnets"
+    "kubernetes.io/role/elb" = 1    # to tell Kubernetes where to deploy external Load Balancer
+    "kubernetes.io/cluster/${local.eks_cluster_name}" = "shared" # allows more than one cluster to use this VPC
+  }
+
+  private_subnet_tags = {
+    Type = "Private-Subnets"
+    "kubernetes.io/role/internal-elb" = 1    # to tell Kubernetes where to deploy internal Load Balancer
+    "kubernetes.io/cluster/${local.eks_cluster_name}" = "shared" # allows more than one cluster to use this VPC
+  }  
+  
 
 }
 

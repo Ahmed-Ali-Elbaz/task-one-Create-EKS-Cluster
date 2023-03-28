@@ -7,7 +7,7 @@ resource "aws_eks_cluster" "eks_cluster" {
 
 
   vpc_config {
-    subnet_ids              = module.vpc.public_subnets
+    subnet_ids              = flatten([module.vpc.public_subnets[*].id, module.vpc.private_subnets[*].id])
     endpoint_private_access = var.cluster_endpoint_private_access
     endpoint_public_access  = var.cluster_endpoint_public_access
     public_access_cidrs     = var.cluster_endpoint_public_access_cidrs
