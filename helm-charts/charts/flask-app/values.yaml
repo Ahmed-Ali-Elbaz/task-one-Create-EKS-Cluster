@@ -1,0 +1,30 @@
+# Default values for flask-app.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+metadata:
+  name: flask-app
+
+replicaCount: 2
+
+image:
+  repository: ahmedhedihed/flask-app
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v5"
+
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 5000 # Container Port
+
+
+resources: 
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
