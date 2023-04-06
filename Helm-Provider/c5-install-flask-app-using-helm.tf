@@ -1,4 +1,3 @@
-# Install EBS CSI Driver using HELM
 # Resource: Helm Release 
 resource "helm_release" "flask_app" {
   name       = "flask-app"
